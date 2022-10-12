@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data":{"url": "https://raw.githubusercontent.com/wzen0014/3179/main/Crash_Data.csv"},
+  "width": 1000,
+  "height": 500,
+  "title": {"text":"Number of car crashes by state in Australia each year", "fontSize": 30},
+  
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2010,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2021,
+        "step": 1,
+        "name": "Year: "
+      }
+    },
+
+    {
+      "name": "State_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Australian Capital Territory",
+          "New South Wales",
+          "Northern Territory",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia"
+        ],
+        "labels":[
+          "Show All",
+          "Australian Capital Territory",
+          "New South Wales",
+          "Northern Territory",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia"
+        ],
+        
+        "name": "State Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Year >= Year_selection"},
+    {"filter": "State_selection == null || datum.State == State_selection"}
+  ],
+
+  "encoding": {"x": {"field": "Year", "type":"nominal",
+    "axis":{
+      "labelAngle":0
+    }
+    }},
+
+  "layer": [
+    {
+      "encoding": {
+        "y": {"aggregate":"count", "field": "Year", "type": "quantitative","title": "Count"},
+        "color": {"field": "State", "type": "nominal", "scale": {"domain": 
+        ["Australian Capital Territory",
+          "New South Wales",
+          "Northern Territory",
+          "Queensland",
+          "South Australia",
+          "Tasmania",
+          "Victoria",
+          "Western Australia"], "range": ["#FF7F00","#4A4947","#FF0000","#75037C","#0059FF","#069081","#F1C40F", "#4412E2"]} 
+        }
+      },
+      "layer": [
+        {
+          "mark":{"type": "line", "tooltip":true}
+        },
+        {
+          "mark":{"type": "text", "dy": -10},
+          "encoding": {
+            "text":{
+              "aggregate":"count", "field": "Year", "type": "quantitative"
+            }
+        
+          }
+        }
+      ]
+    }
+    
+  ]
+  
+  
+
+
+  
+
+
+
+}

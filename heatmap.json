@@ -1,0 +1,96 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data":{"url": "https://raw.githubusercontent.com/wzen0014/3179/main/Crash_Data.csv"},
+    "width": 1000,
+    "height": 500,
+    "title": {"text":"Number of car crashes by state in Australia each year", "fontSize": 30},
+    
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2010,
+        "bind": {
+          "input": "range",
+          "min": 2010,
+          "max": 2021,
+          "step": 1,
+          "name": "Year: "
+        }
+      },
+  
+      {
+        "name": "State_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Australian Capital Territory",
+            "New South Wales",
+            "Northern Territory",
+            "Queensland",
+            "South Australia",
+            "Tasmania",
+            "Victoria",
+            "Western Australia"
+          ],
+          "labels":[
+            "Show All",
+            "Australian Capital Territory",
+            "New South Wales",
+            "Northern Territory",
+            "Queensland",
+            "South Australia",
+            "Tasmania",
+            "Victoria",
+            "Western Australia"
+          ],
+          
+          "name": "State Selection: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "datum.Year >= Year_selection"},
+      {"filter": "State_selection == null || datum.State == State_selection"},
+      {
+        "aggregate": [{"op": "count", "as": "num_cars"}],
+        "groupby": ["State", "Speed_Limit"]
+      }
+    ],
+  
+    "encoding": {
+      "y": {"field": "State", "type": "ordinal"},
+      "x": {"field": "Speed_Limit", "type": "quantitative"}
+    },
+  
+    "layer": [
+      {
+        "mark": "rect",
+        "encoding": {
+          "color": {
+            "field": "num_cars",
+            "type": "quantitative",
+            "title": "Count of Records",
+            "legend": {"direction": "horizontal", "gradientLength": 120}
+          }
+        }
+      },
+      {
+        "mark": "text",
+        "encoding": {
+          "text": {"field": "num_cars", "type": "quantitative"},
+          
+        }
+      }
+    ]
+  
+  
+    
+    
+  
+  
+    
+  
+  
+  
+  }

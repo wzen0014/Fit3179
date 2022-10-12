@@ -1,0 +1,41 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data":{"url": "https://raw.githubusercontent.com/wzen0014/3179/main/Crash_Data.csv"},
+    "width": 500,
+    "height": 500,
+    "title": {"text":"Number of car crashes by day and night", "fontSize": 30},
+    "transform": [
+      {
+        "aggregate": [{"op": "count", "as": "num_crashes"}],
+        "groupby": ["Time _of _day"]
+      }
+    ],
+    "encoding": {
+    "theta": {"field": "num_crashes", "type": "quantitative"},
+    "color": {"field": "Time _of _day", "type": "nominal","title":"Time of Day", 
+    "scale":   {"domain": 
+        ["Day","Night"], "range": ["#FBED79","#AEB5F9"]}}
+    },
+    "layer": [{
+      "mark": {"type": "arc", "outerRadius": 200}
+      }, 
+      {
+      "mark": {"type": "text", "radius": -100, "size": 20},
+      "encoding": {
+        "text": {"field": "num_crashes", "type": "quantitative"},
+        "color":{}
+      }
+      
+  }
+  ]
+  
+
+    
+    
+  
+  
+    
+  
+  
+  
+  }
