@@ -1,0 +1,60 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1000,
+    "height": 500,
+    "title": {"text":"The total number of car accidents in each Australian  state from 2010 to 2021", "fontSize": 30},
+    "projection": {"type": "equirectangular"},
+    "layer": [
+      {
+        "data": {
+          "url":
+          "https://raw.githubusercontent.com/wzen0014/3179/main/count.csv"
+        },
+        "transform": [
+    {
+      "lookup": "State",
+      "from": {
+        "data": {
+          "url":
+          "https://raw.githubusercontent.com/wzen0014/3179/main/map_au_state.json",
+          "format": {
+            "type": "topojson",
+            "feature": "ne_10m_admin_1_states_provinces"
+          }
+        },
+        "key": "properties.name"
+      },
+      "as": "geo"
+    }
+  ],
+  "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5},
+  
+  "encoding": {
+      "shape": {"field": "geo", "type": "geojson"},
+      "color": {
+        "field": "Count",
+        "type": "quantitative",
+        "title": "Count",
+        "scale": {"domain": [100, 5000], "scheme": "greens"},
+        "legend": {"format": ".2s"}
+      },
+      "tooltip": [
+        {"field": "State", "type": "nominal", "title": "State"},
+        {"field" : "Count", "type": "quantitative"},
+        {"field": "Longitude", "type":"quantitative"},
+        {"field": "Latitude", "type":"quantitative"}
+      ]
+    }
+      },
+  
+      {
+        "data": {
+          "url":
+          "https://raw.githubusercontent.com/wzen0014/3179/main/map_au_state.json",
+          "format": {"type": "topojson", "feature":"ne_110m_graticules_15"}
+        },
+        "mark": {"type": "geoshape", "stroke":"black"}
+      }
+      
+    ]
+  }

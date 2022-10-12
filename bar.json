@@ -1,0 +1,46 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data":{"url": "https://raw.githubusercontent.com/wzen0014/3179/main/Crash_Data.csv"},
+    "width": 1000,
+    "height": 500,
+    "title": {"text":"Number of car crashes by Age Group in Australia", "fontSize": 30},
+  
+    "encoding": {"x": {"field": "Age_Group", "type":"nominal",
+      "axis":{
+        "labelAngle":0
+      },
+      "title":"Age Group",
+      "sort": ["40_to_64", "26_to_39", "17_to_25", "75_or_older", "65_to_74", "0_to_16"]
+      }},
+  
+    "layer": [
+      {
+        "encoding": {
+          "y": {"aggregate":"count", "field": "Age_Group", "type": "quantitative","title": "Count"}
+  
+        },
+        "layer": [
+          {
+            "mark":{"type": "bar", "tooltip":true}
+          },
+          {
+            "mark":{"type": "text","dy":-4},
+            "encoding": {
+              "text":{
+                "aggregate":"count", "field": "Age_Group", "type": "quantitative"
+              }
+            }
+          }
+        ]
+      }
+      
+    ]
+    
+    
+  
+  
+    
+  
+  
+  
+  }

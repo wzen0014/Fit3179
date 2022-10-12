@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data":{"url": "https://raw.githubusercontent.com/wzen0014/3179/main/Crash_Data.csv"},
-    "width": 500,
+    "width": 1000,
     "height": 500,
     "title": {"text":"Number of car crashes by day and night", "fontSize": 30},
     "transform": [
